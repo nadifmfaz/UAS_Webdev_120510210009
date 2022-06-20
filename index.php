@@ -206,8 +206,9 @@ if(!$filmAll){
 
     <div class="latest-news pt-150 pb-150">
         <div class="container">
-            <div class="row2">
+            <div class="row">
                 <?php $jenis = 0 ?>
+                <div class="col-sm-12 bg-light py-2 my-4">
                     <h4 class="text-black"><?= $filmAll ? $jenisFilm[$filmAll[0]['jenis_film']] : "jenis film Kosong" ?></h4>
                 </div>
                 <?php foreach ($filmAll as $key => $value): ?>
@@ -217,8 +218,10 @@ if(!$filmAll){
                     endif;
                     ?>
 
-                    <?php if($jenis != $value['jenis_film']): ?>    
-                        <h4 class="text-black"><?= $jenisFilm[$value['jenis_film']] ?></h4>  
+                    <?php if($jenis != $value['jenis_film']): ?>
+                        <div class="col-sm-12 bg-light py-2 my-4">    
+                        <h4 class="text-black"><?= $jenisFilm[$value['jenis_film']] ?></h4>
+                        </div>  
                         <?php $jenis = 0 ?>
                     <?php endif; ?>
 
