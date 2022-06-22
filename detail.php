@@ -52,17 +52,18 @@ endif;
 
                         <nav class="main-menu">
                             <ul>
-                                <li><a href="index.php?jenis_film=1">Sports</a></li>
-                                <li><a href="index.php?jenis_film=2">TV Show</a></li>
-                                <li><a href="index.php?jenis_film=3">Movies</a></li>
+                                <li><a href="index.php?jenis_film=1">Originals</a></li>
+                                <li><a href="index.php?jenis_film=2">Action</a></li>
+                                <li><a href="index.php?jenis_film=3">Comedy</a></li>
                                 <li><a href="index.php?jenis_film=4">Kids</a></li>
+                                <li><a href="index.php?jenis_film=5">Anime</a></li>
                                 <li><a href="#">More</a>
                                     <ul class="sub-menu">
                                         <li>
-                                            <a href="index.php?jenis_film=5">For you</a>
+                                            <a href="index.php">For you</a>
                                         </li>
                                         <li>
-                                            <a href="index.php?jenis_film=6">Anime</a>
+                                            <a href="index.php?jenis_film=5">Anime</a>
                                         </li>
                                         <li>
                                             <a href="index.php?jenis_film=7">News</a>
@@ -117,15 +118,15 @@ endif;
                 <div class="col-sm-8 mt-5">
                     <h3><?= $filmSearch['judul'] ?></h3>
                     <a href="watch.php?id=<?= $filmSearch['id'] ?>" class="btn btn-danger text-white p-3 px-5 my-5" style="border-radius:30px">Mulai Nonton</a><br>
-                    Genre : <?= $filmSearch['genre'] ?><hr>
-                    Rating : <?= $filmSearch['rating'] ?><hr>
-                    Deskripsi : <?= $filmSearch['deskripsi'] ?><hr>
-                    Pemain : <?= $filmSearch['pemain'] ?>
+                    <?= $filmSearch['deskripsi'] ?><hr>
+                    <span style="font-weight:bold">Genre :</span> <?= $filmSearch['genre'] ?><hr>
+                    <span style="font-weight:bold">Rating :</span> <?= $filmSearch['rating'] ?><hr>
+                    <span style="font-weight:bold">Pemain :</span> <?= $filmSearch['pemain'] ?>
                 </div>
             </div>
             <div class="row mt-5">
                 <div class="col-sm-12 mb-4">
-                    <h5>Similar to Movie "<?= $filmSearch['judul'] ?>"</h5>
+                    <h5>Film yang Serupa dengan "<?= $filmSearch['judul'] ?>"</h5>
                 </div>
                 <?php foreach ($anotherFilm as $key => $value): ?>
                     <div class="col-sm-2">
@@ -133,9 +134,6 @@ endif;
                             <a href="detail.php?id=<?= $value['id'] ?>">
                                 <img src="<?= $value['poster'] ?>" alt="">
                             </a>
-                            <div class="news-text-box p-1 text-dark">
-                                <p><a href="single-news.html" class="text-dark"><?= $value['judul'] ?></a></p>
-                            </div>
                         </div>
                     </div>
                 <?php endforeach ?>
@@ -147,7 +145,7 @@ endif;
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
-                    <p>©Pidio Indonesia &copy; <?= date("Y") ?>.
+                    <p>Pidio Indonesia &copy; <?= date("Y")?> All right reserved.
                     </p>
                 </div>
             </div>

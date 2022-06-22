@@ -4,12 +4,14 @@ require 'functions.php';
 
 $jenisFilm = ["","Original","Action","Comedy","Kids","Anime"];
 
-$film10 = query("SELECT * FROM film order by deskripsi desc limit 10");
-$filmAll = query("SELECT * FROM film order by jenis_film asc");
+$film10 = query("SELECT * FROM film ORDER BY deskripsi desc limit 10");
+$filmAll = query("SELECT * FROM film ORDER BY jenis_film asc");
+
 
 if($_GET){
-    $film10 = query("SELECT * FROM film where jenis_film = $_GET[jenis_film] order by deskripsi desc limit 10");
-    $filmAll = query("SELECT * FROM film where jenis_film = $_GET[jenis_film] order by jenis_film asc");
+    $film10 = query("SELECT * FROM film where jenis_film = $_GET[jenis_film] ORDER BY deskripsi desc limit 10");
+    $filmAll = query("SELECT * FROM film where jenis_film = $_GET[jenis_film] ORDER BY jenis_film asc");
+    $genreFilm = query("SELECT * FROM film ORDER BY genre asc");
 }
 
 if(!$filmAll){
@@ -39,6 +41,7 @@ if(!$filmAll){
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
     
 </head>
 <body>
@@ -55,17 +58,18 @@ if(!$filmAll){
 
                         <nav class="main-menu">
                             <ul>
-                                <li><a href="index.php?jenis_film=1">Sports</a></li>
-                                <li><a href="index.php?jenis_film=2">TV Show</a></li>
-                                <li><a href="index.php?jenis_film=3">Movies</a></li>
+                                <li><a href="index.php?jenis_film=1">Originals</a></li>
+                                <li><a href="index.php?jenis_film=2">Action</a></li>
+                                <li><a href="index.php?jenis_film=3">Comedy</a></li>
                                 <li><a href="index.php?jenis_film=4">Kids</a></li>
+                                <li><a href="index.php?jenis_film=5">Anime</a></li>
                                 <li><a href="#">More</a>
                                     <ul class="sub-menu">
-                                        <li>
-                                            <a href="index.php?jenis_film=5">For you</a>
+                                    <li>
+                                            <a href="index.php">For you</a>
                                         </li>
                                         <li>
-                                            <a href="index.php?jenis_film=6">Anime</a>
+                                            <a href="index.php?jenis_film=5">Anime</a>
                                         </li>
                                         <li>
                                             <a href="index.php?jenis_film=7">News</a>
@@ -88,13 +92,14 @@ if(!$filmAll){
                                     </ul>
                                 </li>
                                 <li>
-                                    <div class="search_bar">
-                                        <form action="search.php" method="get">
+                                    <form action="search.php" method="get">
+                                        <div class="search_bar">
                                             <input type="text" placeholder="Cari di Pidio" class="search_input" name="judul">
-                                            <span class="search_submit"><button class="btn button-search search_bar_submit_button" type="submit"><i class="fas fa-search"></i>
-                                            </button></span>
-                                        </form>
-                                    </div>
+                                            <span class="search_submit">
+                                                <button class="btn button-search search_bar_submit_button" type="submit"><i class="fas fa-search"></i></button>
+                                            </span>
+                                        </div>
+                                    </form>
                                 </li>
                             </ul>
                         </nav>
@@ -118,80 +123,88 @@ if(!$filmAll){
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="img/big/slider-1.webp" alt="First slide">
+                <a href="detail.php?id=212"><img class="d-block w-100" src="img/big/slider-1.webp" alt="1st slide"></a>
                 <div class="carousel-caption d-none d-md-block">
-                    <h1 class="carousel-text">Pertaruhan The Series</h1>
-                    <p class="carousel-desc">Keluar dari penjara, Elzan berjuang mencari uang lewat pertarungan jalanan dan menjadi penagih utang demi menebus rumah keluarga yang mau disita oleh bank. 
-                        Dibantu oleh Ara dan Rio, Elzan memperjuangkan keutuhan keluarganya dengan mempertaruhkan segalanya.</p>
+                    <h1 class="carousel-text">Pertaruhan <br> The Series</h1>
+                    <p class="carousel-desc">Keluar dari penjara, Elzan berjuang mencari uang lewat pertarungan jalanan <br> dan menjadi penagih utang demi menebus rumah keluarga yang mau disita oleh bank. </p>
+                    <a href="watch.php?id=212" class="btn btn-danger text-white p-3 px-5 my-5" style="border-radius:30px">Mulai Nonton</a><br>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="img/big/slider-2.webp" alt="Second slide">
+                <a href="detail.php?id=221"><img class="d-block w-100" src="img/big/slider-2.webp" alt="2nd slide"></a>
                 <div class="carousel-caption d-none d-md-block">
-                    <h1 class="carousel-text">New Journey to The West: Season 8</h1>
-                    <p class="carousel-desc">Di Musim 8, anggota saat ini akan kembali dan temanya akan didasarkan pada dongeng tradisional Korea, Heungbu dan Nolbu.</p>
+                    <h1 class="carousel-text">New Journey to The West: <br> Season 8</h1>
+                    <p class="carousel-desc">Di Musim 8, anggota saat ini akan kembali dan temanya akan didasarkan <br> pada dongeng tradisional Korea, Heungbu dan Nolbu.</p>
+                    <a href="watch.php?id=221" class="btn btn-danger text-white p-3 px-5 my-5" style="border-radius:30px">Mulai Nonton</a><br>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="img/big/slider-3.webp" alt="Third slide">
+                <a href="detail.php?id=217"><img class="d-block w-100" src="img/big/slider-3.webp" alt="3rd slide"></a>
                 <div class="carousel-caption d-none d-md-block">
                     <h1 class="carousel-text">Dishoom</h1>
-                    <p class="carousel-desc">Dua hari sebelum bentrokan besar antara India dan Pakistan, pemain kriket top Viraj Sharma hilang. Dengan hanya 36 jam tersisa untuk menemukannya, 
-                        Departemen Kepolisian Emirates mempekerjakan seorang perwira India, Kabir Shergill, untuk menyelesaikan kasus tersebut.</p>
+                    <p class="carousel-desc">Dua hari sebelum bentrokan besar antara India dan Pakistan, <br> pemain kriket top Viraj Sharma hilang. Departemen Kepolisian Emirates <br> mempekerjakan seorang perwira India, <br> Kabir Shergill, untuk menyelesaikan kasus tersebut.</p>
+                    <a href="watch.php?id=217" class="btn btn-danger text-white p-3 px-5 my-5" style="border-radius:30px">Mulai Nonton</a><br>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="img/big/slider-4.webp" alt="Fourth slide">
+                <a href="detail.php?id=214"><img class="d-block w-100" src="img/big/slider-4.webp" alt="4th slide"></a>
                 <div class="carousel-caption d-none d-md-block">
                     <h1 class="carousel-text">Bad Boys</h1>
-                    <p class="carousel-desc">Dua detektif melindungi seorang saksi untuk pembunuhan sambil menyelidiki kasus heroin curian dari ruang penyimpanan bukti dari kantor polisi mereka.</p>
+                    <p class="carousel-desc">Dua detektif melindungi seorang saksi untuk pembunuhan sambil menyelidiki <br> kasus heroin curian dari ruang penyimpanan bukti dari kantor polisi mereka.</p>
+                    <a href="watch.php?id=214" class="btn btn-danger text-white p-3 px-5 my-5" style="border-radius:30px">Mulai Nonton</a><br>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="img/big/slider-5.webp" alt="Fifth slide">
+                <a href="detail.php?id=215"><img class="d-block w-100" src="img/big/slider-5.webp" alt="5th slide"></a>
                 <div class="carousel-caption d-none d-md-block">
                     <h1 class="carousel-text">ATM: Errak Error</h1>
-                    <p class="carousel-desc">Hubungan backstreet Jib dan Sua selama 5 tahun membawa mereka kepada persaingan sengit untuk menentukan siapa dari keduanya yang akan resign dari Bank tempat mereka bekerja.</p>
+                    <p class="carousel-desc">Hubungan backstreet Jib dan Sua selama 5 tahun membawa mereka <br> kepada persaingan sengit untuk menentukan siapa dari <br> keduanya yang akan resign dari Bank tempat mereka bekerja.</p>
+                    <a href="watch.php?id=215" class="btn btn-danger text-white p-3 px-5 my-5" style="border-radius:30px">Mulai Nonton</a><br>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="img/big/slider-6.webp" alt="Sixth slide">
+                <a href="detail.php?id=216"><img class="d-block w-100" src="img/big/slider-6.webp" alt="6th slide"></a>
                 <div class="carousel-caption d-none d-md-block">
                     <h1 class="carousel-text">Kung Fu Panda</h1>
-                    <p class="carousel-desc">Yang mengejutkan semua orang, termasuk dirinya sendiri, Po, panda yang kelebihan berat badan dan canggung, dipilih sebagai pelindung Lembah Damai. 
-                        Kesesuaiannya akan segera diuji saat musuh bebuyutan lembah datang kembali.</p>
+                    <p class="carousel-desc">Yang mengejutkan semua orang, termasuk dirinya sendiri, <br> Po, panda yang kelebihan berat badan dan canggung,<br> dipilih sebagai pelindung Lembah Damai. </p>
+                    <a href="watch.php?id=216" class="btn btn-danger text-white p-3 px-5 my-5" style="border-radius:30px">Mulai Nonton</a><br>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="img/big/slider-7.webp" alt="Seventh slide">
+                <a href="detail.php?id=213"><img class="d-block w-100" src="img/big/slider-7.webp" alt="7th slide"></a>
                 <div class="carousel-caption d-none d-md-block">
                     <h1 class="carousel-text">Virgin Mom</h1>
-                    <p class="carousel-desc">Seorang gadis yang masih perawan dan juga atlit berprestasi di bidang badminton tiba-tiba hamil tanpa pernah behubungan seks. 
-                        Hamil dengan tetap perawan mengejutkan keluarga dan lingkungan di sekitarnya.</p>
+                    <p class="carousel-desc">Seorang gadis yang masih perawan dan juga atlit berprestasi di bidang badminton <br> tiba-tiba hamil tanpa pernah behubungan seks. 
+                    Hamil dengan tetap perawan <br> mengejutkan keluarga dan lingkungan di sekitarnya.</p>
+                    <a href="watch.php?id=213" class="btn btn-danger text-white p-3 px-5 my-5" style="border-radius:30px">Mulai Nonton</a><br>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="img/big/slider-8.webp" alt="Eighth slide">
+                <a href="detail.php?id=220"><img class="d-block w-100" src="img/big/slider-8.webp" alt="8th slide"></a>
                 <div class="carousel-caption d-none d-md-block">
-                    <h1 class="carousel-text">The Spiderwick Chronicles</h1>
-                    <p class="carousel-desc">Saudara kembar Jared dan Simon Grace pindah ke Spiderwick Estate bersama ibu dan saudara perempuan mereka. 
-                        Sesampai di sana, mereka menemukan diri mereka dikelilingi oleh makhluk ajaib.</p>
+                    <h1 class="carousel-text">The Spiderwick <br> Chronicles</h1>
+                    <p class="carousel-desc">Saudara kembar Jared dan Simon Grace pindah ke Spiderwick Estate <br> bersama ibu dan saudara perempuan mereka. <br> 
+                    Sesampai di sana, mereka menemukan diri mereka dikelilingi oleh makhluk ajaib.</p>
+                    <a href="watch.php?id=220" class="btn btn-danger text-white p-3 px-5 my-5" style="border-radius:30px">Mulai Nonton</a><br>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="img/big/slider-9.webp" alt="Ninth slide">
+                <a href="detail.php?id=218"><img class="d-block w-100" src="img/big/slider-9.webp" alt="9th slide"></a>
                 <div class="carousel-caption d-none d-md-block">
                     <h1 class="carousel-text">Haikyuu!!</h1>
-                    <p class="carousel-desc">Bertekad untuk menjadi seperti pemain bintang kejuaraan bola voli Shouyou, seorang anak laki-laki pendek yang dijuluki "raksasa kecil", bergabung dengan klub bola voli sekolahnya.</p>
+                    <p class="carousel-desc">Bertekad untuk menjadi seperti pemain bintang kejuaraan bola voli Shouyou, <br> seorang anak laki-laki pendek yang dijuluki "raksasa kecil", <br> bergabung dengan klub bola voli sekolahnya.</p>
+                    <a href="watch.php?id=218" class="btn btn-danger text-white p-3 px-5 my-5" style="border-radius:30px">Mulai Nonton</a><br>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="img/big/slider-10.webp" alt="Tenth slide">
+                <a href="detail.php?id=219"><img class="d-block w-100" src="img/big/slider-10.webp" alt="10th slide"></a>
                 <div class="carousel-caption d-none d-md-block">
-                    <h1 class="carousel-text">Doraemon The Movie: Nobita's Chronicle of the Moon</h1>
-                    <p class="carousel-desc">Nobita melihat bulan menguning tadi malam dan memberitahu kelasnya tentang hal itu tapi mereka pikir itu lucu. 
-                        Doraemon memberinya "Lencana Klub Penjelajah Sejarah" dan menemukan ada kehidupan di bulan.</p>
+                    <h1 class="carousel-text">Doraemon The Movie: <br> Nobita's Chronicle of the Moon</h1>
+                    <p class="carousel-desc">Nobita melihat bulan menguning tadi malam dan memberitahu kelasnya <br> tentang hal itu tapi mereka pikir itu lucu.
+                    Doraemon memberinya "Lencana Klub Penjelajah Sejarah" <br> dan menemukan ada kehidupan di bulan.</p>
+                    <a href="watch.php?id=219" class="btn btn-danger text-white p-3 px-5 my-5" style="border-radius:30px">Mulai Nonton</a><br>
                 </div>
+                <span></span>
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -203,13 +216,13 @@ if(!$filmAll){
             <span class="sr-only">Next</span>
         </a>
     </div>
-
+    
     <div class="latest-news pt-150 pb-150">
         <div class="container">
-            <div class="row">
+            <div class="row-film">
                 <?php $jenis = 0 ?>
                 <div class="col-sm-12 bg-light py-2 my-4">
-                    <h4 class="text-black"><?= $filmAll ? $jenisFilm[$filmAll[0]['jenis_film']] : "jenis film Kosong" ?></h4>
+                    <h4 class="text-black"><?= $filmAll ? $jenisFilm[$filmAll[0]['jenis_film']] : "Segera hadir" ?></h4>
                 </div>
                 <?php foreach ($filmAll as $key => $value): ?>
                     <?php 
@@ -241,7 +254,7 @@ if(!$filmAll){
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
-                    <p>Pidio Indonesia &copy; <?= date("Y") ?>.
+                    <p>Pidio Indonesia &copy; <?= date("Y")?> All right reserved.
                     </p>
                 </div>
             </div>
@@ -257,6 +270,7 @@ if(!$filmAll){
     <script src="assets/js/jquery.meanmenu.min.js"></script>
     <script src="assets/js/sticker.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
 </body>
 </html>

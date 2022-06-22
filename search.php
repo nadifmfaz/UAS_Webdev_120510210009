@@ -3,10 +3,8 @@
 require 'functions.php';
 $filmSearch = query("SELECT * FROM film order by deskripsi desc");
 
-$jenisFilm = ["","Original","Action","Comedy","Kids","Anime"];
-
 if($_GET):
-    $filmSearch = query("SELECT * FROM film where judul like '%$_GET[judul]%' order by deskripsi desc");
+    $filmSearch = query("SELECT * FROM film where judul like '%$_GET[judul]%' order by deskripsi desc");  
 else:
     header('Location: ');
 endif;
@@ -48,17 +46,18 @@ endif;
                         </div>
                         <nav class="main-menu">
                             <ul>
-                                <li><a href="index.php?jenis_film=1">Sports</a></li>
-                                <li><a href="index.php?jenis_film=2">TV Show</a></li>
-                                <li><a href="index.php?jenis_film=3">Movies</a></li>
+                                <li><a href="index.php?jenis_film=1">Originals</a></li>
+                                <li><a href="index.php?jenis_film=2">Action</a></li>
+                                <li><a href="index.php?jenis_film=3">Comedy</a></li>
                                 <li><a href="index.php?jenis_film=4">Kids</a></li>
+                                <li><a href="index.php?jenis_film=5">Anime</a></li>
                                 <li><a href="#">More</a>
                                     <ul class="sub-menu">
                                         <li>
-                                            <a href="index.php?jenis_film=5">For you</a>
+                                            <a href="index.php">For you</a>
                                         </li>
                                         <li>
-                                            <a href="index.php?jenis_film=6">Anime</a>
+                                            <a href="index.php?jenis_film=5">Anime</a>
                                         </li>
                                         <li>
                                             <a href="index.php?jenis_film=7">News</a>
@@ -102,7 +101,7 @@ endif;
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="section-title"> 
-                        <h3 class="search_result">Hasil Pencarian Untuk <div class="result-text mt-2"><?= $_GET['judul'] ?></div></h3>
+                        <h3 class="search_result">Hasil Pencarian Untuk <div class="result-text mt-2">"<?= $_GET['judul'] ?>"</div></h3>
                     </div>
                 </div>
             </div>
@@ -123,10 +122,10 @@ endif;
                                     </p>
                                     <hr>
                                     <p>
-                                        Genre : <?= $value['genre'] ?><hr>
-                                        Rating : <?= $value['rating'] ?><hr>
-                                        Deskripsi : <?= $value['deskripsi'] ?><hr>
-                                        Pemain : <?= $value['pemain'] ?>
+                                        <?= $value['deskripsi'] ?><hr>
+                                        <span style="font-weight:bold">Genre :</span> <?= $value['genre'] ?><hr>
+                                        <span style="font-weight:bold">Rating :</span> <?= $value['rating'] ?><hr>
+                                        <span style="font-weight:bold">Pemain :</span> <?= $value['pemain'] ?>
                                     </p>
                                 </div>
                             </div>
@@ -141,7 +140,7 @@ endif;
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
-                    <p>Pidio Indonesia &copy; <?= date("Y") ?>.
+                    <p>Pidio Indonesia &copy; <?= date("Y")?> All right reserved.
                     </p>
                 </div>
             </div>
